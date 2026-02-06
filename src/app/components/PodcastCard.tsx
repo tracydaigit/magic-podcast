@@ -57,8 +57,8 @@ export function PodcastCard({ podcast }: { podcast: Podcast }) {
       const supabase = createClient();
 
       // Delete audio from storage if it exists
-      if (podcast.audio_path) {
-        await supabase.storage.from("podcast-audio").remove([podcast.audio_path]);
+      if (podcast.audio_url) {
+        await supabase.storage.from("podcast-audio").remove([podcast.audio_url]);
       }
 
       // Delete the database record
