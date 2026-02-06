@@ -130,7 +130,7 @@ export function PodcastCard({ podcast }: { podcast: Podcast }) {
   );
 
   if (isClickable) {
-    return <Link href={`/podcast/${podcast.id}`}>{content}</Link>;
+    return <Link href={`/podcast/${podcast.id}`} className="block">{content}</Link>;
   }
 
   return content;
