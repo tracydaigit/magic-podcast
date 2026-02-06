@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase-server";
 import { extractFromUrl } from "@/lib/extractor";
 
+export const maxDuration = 60;
+
 export async function POST(request: NextRequest) {
   try {
     const supabase = await createClient();

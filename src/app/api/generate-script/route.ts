@@ -3,7 +3,7 @@ import { createClient } from "@/lib/supabase-server";
 import { generateScript } from "@/lib/script-generator";
 import type { ExtractedContent } from "@/lib/types";
 
-export const maxDuration = 60; // Allow up to 60 seconds for script generation
+export const maxDuration = 300; // Allow up to 5 minutes for long articles
 
 export async function POST(request: NextRequest) {
   try {
