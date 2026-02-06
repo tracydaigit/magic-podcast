@@ -1,0 +1,17 @@
+{
+  "name": "Magic Podcast",
+  "short_name": "Magic Podcast",
+  "description": "Turn articles into podcasts you can listen to anywhere.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}
