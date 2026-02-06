@@ -92,6 +92,16 @@ export function NewPodcastForm() {
     }
   }, []);
 
+  const safeJson = async (res: Response) => {
+    const text = await res.text();
+    if (!text) return {};
+    try {
+      return JSON.parse(text);
+    } catch {
+      return { error: text || "Request failed" };
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!hasInput) return;
@@ -124,8 +134,10 @@ export function NewPodcastForm() {
       isFile: !!file,
     });
 
+    const supabase = createClient();
+    let createdPodcastId: string | null = null;
+
     try {
-      const supabase = createClient();
       const {
         data: { user },
       } = await supabase.auth.getUser();
@@ -147,6 +159,8 @@ export function NewPodcastForm() {
       if (insertError || !podcast)
         throw new Error(insertError?.message || "Failed to create podcast");
 
+      createdPodcastId = podcast.id;
+
       if (signal.aborted) throw new DOMException("Aborted", "AbortError");
 
       let content;
@@ -165,11 +179,11 @@ export function NewPodcastForm() {
         });
 
         if (!extractRes.ok) {
-          const err = await extractRes.json();
+          const err = await safeJson(extractRes);
           throw new Error(err.error || "PDF extraction failed");
         }
 
-        const result = await extractRes.json();
+        const result = await safeJson(extractRes);
         content = result.content;
       } else {
         new URL(url);
@@ -181,11 +195,11 @@ export function NewPodcastForm() {
         });
 
         if (!extractRes.ok) {
-          const err = await extractRes.json();
+          const err = await safeJson(extractRes);
           throw new Error(err.error || "Extraction failed");
         }
 
-        const result = await extractRes.json();
+        const result = await safeJson(extractRes);
         content = result.content;
       }
 
@@ -210,11 +224,11 @@ export function NewPodcastForm() {
       });
 
       if (!scriptRes.ok) {
-        const err = await scriptRes.json();
+        const err = await safeJson(scriptRes);
         throw new Error(err.error || "Script generation failed");
       }
 
-      const { script } = await scriptRes.json();
+      const { script } = await safeJson(scriptRes);
 
       // Step 3: Synthesize audio
       setCurrentStep("synthesizing");
@@ -226,7 +240,7 @@ export function NewPodcastForm() {
       });
 
       if (!synthRes.ok) {
-        const err = await synthRes.json();
+        const err = await safeJson(synthRes);
         throw new Error(err.error || "Audio synthesis failed");
       }
 
@@ -236,6 +250,13 @@ export function NewPodcastForm() {
       setFile(null);
       router.refresh();
     } catch (err) {
+      // Clean up the failed database entry
+      if (createdPodcastId) {
+        supabase.from("podcasts").delete().eq("id", createdPodcastId).then(() => {
+          router.refresh();
+        });
+      }
+
       if (err instanceof DOMException && err.name === "AbortError") {
         setError("Generation cancelled");
       } else {
