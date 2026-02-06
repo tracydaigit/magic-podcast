@@ -49,7 +49,7 @@ export default async function HomePage() {
           </p>
         </div>
       ) : (
-        <div className="space-y-3">
+        <div className="space-y-4">
           {podcastList.map((podcast) => (
             <PodcastCard key={podcast.id} podcast={podcast} />
           ))}
