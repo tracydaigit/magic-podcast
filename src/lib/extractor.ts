@@ -33,7 +33,7 @@ async function extractFromHtml(
     throw new Error("Could not extract article content from this URL");
   }
 
-  const textContent = article.textContent.trim();
+  const textContent = (article.textContent ?? "").trim();
   const wordCount = textContent.split(/\s+/).length;
 
   return {
