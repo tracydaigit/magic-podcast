@@ -4,6 +4,7 @@ import { PodcastCard } from "./components/PodcastCard";
 import { NewPodcastForm } from "./components/NewPodcastForm";
 import type { Podcast } from "@/lib/types";
 import { SignOutButton } from "./components/SignOutButton";
+import { SoundWaveform } from "./components/SoundWaveform";
 
 export default async function HomePage() {
   const user = await requireAuth();
@@ -32,9 +33,12 @@ export default async function HomePage() {
             </svg>
           </div>
           <div>
-            <h1 className="font-serif text-2xl font-semibold text-primary tracking-tight">
-              Magic Podcast
-            </h1>
+            <div className="flex items-center gap-2">
+              <h1 className="font-serif text-2xl font-semibold text-primary tracking-tight">
+                Magic Podcast
+              </h1>
+              <SoundWaveform />
+            </div>
             <p className="text-sm text-secondary mt-0.5 font-[family-name:var(--font-newsreader)] italic">
               Your article podcasts
             </p>

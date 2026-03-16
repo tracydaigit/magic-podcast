@@ -99,3 +99,18 @@ input[type="range"]::-moz-range-thumb {
 .animate-fade-up-delay-2 {
   animation: fadeUp 0.5s 0.2s ease-out both;
 }
+
+/* Sound waveform animation */
+@keyframes waveform {
+  0%, 100% {
+    height: 8px;
+  }
+  50% {
+    height: 24px;
+  }
+}
+
+.waveform-bar {
+  height: 8px;
+  animation: waveform 1.2s ease-in-out infinite;
+}
