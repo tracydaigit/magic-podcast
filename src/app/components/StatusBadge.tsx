@@ -7,17 +7,17 @@ const statusConfig: Record<
 > = {
   extracting: {
     label: "Extracting",
-    className: "bg-blue-50 text-blue-700",
+    className: "bg-accent/10 text-accent",
     animate: true,
   },
   generating: {
     label: "Writing script",
-    className: "bg-blue-50 text-blue-700",
+    className: "bg-accent/10 text-accent",
     animate: true,
   },
   synthesizing: {
     label: "Generating audio",
-    className: "bg-blue-50 text-blue-700",
+    className: "bg-accent/10 text-accent",
     animate: true,
   },
   ready: {
@@ -30,7 +30,7 @@ const statusConfig: Record<
   },
   expired: {
     label: "Expired",
-    className: "bg-gray-100 text-gray-500",
+    className: "bg-divider text-tertiary",
   },
 };
 

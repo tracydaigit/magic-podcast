@@ -28,23 +28,33 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center px-6">
-      <div className="w-full max-w-sm">
+      <div className="w-full max-w-sm animate-fade-up">
         <div className="mb-10">
-          <h1 className="text-2xl font-semibold text-gray-900 tracking-tight">
+          <div className="flex items-center gap-2.5 mb-4">
+            <div className="w-9 h-9 bg-accent rounded-full flex items-center justify-center">
+              <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-[18px] h-[18px]">
+                <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                <line x1="12" y1="19" x2="12" y2="23"/>
+                <line x1="8" y1="23" x2="16" y2="23"/>
+              </svg>
+            </div>
+          </div>
+          <h1 className="font-[family-name:var(--font-fraunces)] text-2xl font-semibold text-primary tracking-tight">
             Magic Podcast
           </h1>
-          <p className="mt-2 text-sm text-gray-500">
+          <p className="mt-2 text-sm text-secondary font-[family-name:var(--font-newsreader)] italic">
             Turn articles into podcasts you can listen to anywhere.
           </p>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 animate-fade-up-delay-1">
           {error && <p className="text-sm text-red-600">{error}</p>}
 
           <button
             onClick={handleGoogleLogin}
             disabled={loading}
-            className="w-full flex items-center justify-center gap-3 bg-white border border-gray-300 rounded-md px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="w-full flex items-center justify-center gap-3 bg-surface-card border border-border rounded-lg px-4 py-2.5 text-sm font-medium text-primary hover:bg-divider disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {loading ? (
               <Loader2 className="w-4 h-4 animate-spin" />

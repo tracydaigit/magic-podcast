@@ -42,7 +42,7 @@ export default async function PodcastPage({
       {/* Back link */}
       <Link
         href="/"
-        className="inline-flex items-center gap-1.5 text-sm text-gray-500 hover:text-gray-700 transition-colors mb-6"
+        className="inline-flex items-center gap-1.5 text-sm text-secondary hover:text-primary transition-colors mb-6"
       >
         <ArrowLeft className="w-4 h-4" />
         Back
@@ -50,18 +50,18 @@ export default async function PodcastPage({
 
       {/* Title and metadata */}
       <div className="mb-8">
-        <h1 className="text-xl font-semibold text-gray-900 leading-snug">
+        <h1 className="font-[family-name:var(--font-fraunces)] text-xl font-semibold text-primary leading-snug">
           {p.title}
         </h1>
         <div className="flex items-center gap-4 mt-3">
           {p.duration_seconds && (
-            <span className="inline-flex items-center gap-1 text-xs text-gray-500">
+            <span className="inline-flex items-center gap-1 text-xs text-secondary">
               <Clock className="w-3.5 h-3.5" />
               {formatDuration(p.duration_seconds)}
             </span>
           )}
           {p.word_count && (
-            <span className="inline-flex items-center gap-1 text-xs text-gray-500">
+            <span className="inline-flex items-center gap-1 text-xs text-secondary">
               <FileText className="w-3.5 h-3.5" />
               {p.word_count.toLocaleString()} words
             </span>
@@ -71,7 +71,7 @@ export default async function PodcastPage({
               href={p.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 text-xs text-gray-500 hover:text-gray-700 transition-colors"
+              className="inline-flex items-center gap-1 text-xs text-secondary hover:text-primary transition-colors"
             >
               <ExternalLink className="w-3.5 h-3.5" />
               Source
@@ -82,7 +82,7 @@ export default async function PodcastPage({
 
       {/* Audio player */}
       {p.status === "ready" && p.audio_url && (
-        <div className="mb-8 p-5 border border-gray-200 rounded-lg">
+        <div className="mb-8 p-5 border border-border rounded-xl bg-surface-card">
           <PlayerSection podcastId={p.id} />
         </div>
       )}
@@ -90,7 +90,7 @@ export default async function PodcastPage({
       {/* Transcript */}
       {script.length > 0 && (
         <div>
-          <h2 className="text-lg font-medium text-gray-900 mb-4">
+          <h2 className="text-lg font-medium text-primary mb-4">
             Transcript
           </h2>
           <div className="space-y-4">
@@ -99,13 +99,13 @@ export default async function PodcastPage({
                 <span
                   className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-medium ${
                     segment.speaker === "A"
-                      ? "bg-gray-900 text-white"
-                      : "bg-gray-100 text-gray-700"
+                      ? "bg-accent text-white"
+                      : "bg-divider text-primary"
                   }`}
                 >
                   {segment.speaker}
                 </span>
-                <p className="text-sm text-gray-700 leading-relaxed pt-0.5">
+                <p className="text-sm text-secondary leading-relaxed pt-0.5">
                   {segment.text}
                 </p>
               </div>

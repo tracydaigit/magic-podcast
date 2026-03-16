@@ -1,21 +1,30 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #111827;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-background: #FAF8F5;
+  --color-foreground: #2D2A26;
+  --color-primary: #2D2A26;
+  --color-secondary: #8C857B;
+  --color-tertiary: #A69E93;
+  --color-accent: #C4956A;
+  --color-accent-hover: #B5865C;
+  --color-surface: #FAF8F5;
+  --color-surface-card: #FFFFFF;
+  --color-surface-input: #FDFCFA;
+  --color-border: #EAE5DD;
+  --color-border-input: #E4DED5;
+  --color-divider: #F5F1EB;
+  --color-placeholder: #C4BAB0;
+
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-fraunces), serif;
+  --font-serif-body: var(--font-newsreader), serif;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -30,12 +39,12 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #d1d5db;
+  background: var(--color-border);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #9ca3af;
+  background: var(--color-tertiary);
 }
 
 /* Audio player range input styling */
@@ -43,7 +52,7 @@ input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   height: 4px;
-  background: #e5e7eb;
+  background: var(--color-border);
   border-radius: 2px;
   outline: none;
 }
@@ -54,7 +63,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #111827;
+  background: var(--color-accent);
   cursor: pointer;
 }
 
@@ -62,7 +71,31 @@ input[type="range"]::-moz-range-thumb {
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: #111827;
+  background: var(--color-accent);
   cursor: pointer;
   border: none;
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.5s ease-out both;
+}
+
+.animate-fade-up-delay-1 {
+  animation: fadeUp 0.5s 0.1s ease-out both;
+}
+
+.animate-fade-up-delay-2 {
+  animation: fadeUp 0.5s 0.2s ease-out both;
 }

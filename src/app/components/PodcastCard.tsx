@@ -71,22 +71,22 @@ export function PodcastCard({ podcast }: { podcast: Podcast }) {
   };
 
   const content = (
-    <div className="group border border-gray-200 rounded-lg p-4 hover:border-gray-300 transition-colors relative">
+    <div className="group border border-border rounded-xl p-4 hover:border-tertiary hover:shadow-sm transition-all relative bg-surface-card">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0 flex-1">
-          <h3 className="text-sm font-medium text-gray-900 truncate">
+          <h3 className="text-sm font-medium text-primary truncate">
             {podcast.title}
           </h3>
           <div className="flex items-center gap-3 mt-1.5">
             <StatusBadge status={podcast.status} />
             {podcast.duration_seconds && (
-              <span className="inline-flex items-center gap-1 text-xs text-gray-500">
+              <span className="inline-flex items-center gap-1 text-xs text-secondary">
                 <Clock className="w-3 h-3" />
                 {formatDuration(podcast.duration_seconds)}
               </span>
             )}
             {podcast.word_count && (
-              <span className="inline-flex items-center gap-1 text-xs text-gray-500">
+              <span className="inline-flex items-center gap-1 text-xs text-secondary">
                 <FileText className="w-3 h-3" />
                 {podcast.word_count.toLocaleString()} words
               </span>
@@ -95,13 +95,13 @@ export function PodcastCard({ podcast }: { podcast: Podcast }) {
         </div>
         <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
           <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-400">
+            <span className="text-xs text-tertiary">
               {formatDate(podcast.created_at)}
             </span>
             <button
               onClick={handleDelete}
               disabled={deleting}
-              className="p-1 text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all disabled:opacity-50"
+              className="p-1 text-placeholder hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all disabled:opacity-50"
               title="Delete podcast"
             >
               <Trash2 className="w-3.5 h-3.5" />
@@ -115,7 +115,7 @@ export function PodcastCard({ podcast }: { podcast: Podcast }) {
         </div>
       </div>
       {podcast.url && (
-        <div className="mt-2 flex items-center gap-1 text-xs text-gray-400 truncate">
+        <div className="mt-2 flex items-center gap-1 text-xs text-tertiary truncate">
           {getSourceLabel(podcast.url).isFile ? (
             <Upload className="w-3 h-3 flex-shrink-0" />
           ) : (

@@ -297,7 +297,7 @@ export function NewPodcastForm() {
       <form onSubmit={handleSubmit} className="space-y-3">
         {/* URL input */}
         <div className="relative">
-          <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+          <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-tertiary" />
           <input
             type="url"
             value={url}
@@ -311,39 +311,39 @@ export function NewPodcastForm() {
             }}
             placeholder="Paste article URL..."
             disabled={loading || !!file}
-            className="w-full border border-gray-300 rounded-md pl-9 pr-3 py-2 text-sm text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent disabled:opacity-50 transition-shadow"
+            className="w-full border border-border-input rounded-lg pl-9 pr-3 py-2.5 text-sm text-primary bg-surface-input placeholder:text-placeholder focus:outline-none focus:ring-2 focus:ring-accent/20 focus:border-accent disabled:opacity-50 transition-all"
           />
         </div>
 
         {/* Divider */}
         <div className="flex items-center gap-3">
-          <div className="flex-1 border-t border-gray-200" />
-          <span className="text-xs text-gray-400">or</span>
-          <div className="flex-1 border-t border-gray-200" />
+          <div className="flex-1 border-t border-divider" />
+          <span className="text-xs text-tertiary">or</span>
+          <div className="flex-1 border-t border-divider" />
         </div>
 
         {/* File upload */}
         {file ? (
-          <div className="flex items-center gap-2 p-3 border border-gray-200 rounded-md bg-gray-50">
-            <Upload className="w-4 h-4 text-gray-500 flex-shrink-0" />
-            <span className="text-sm text-gray-700 truncate flex-1">
+          <div className="flex items-center gap-2 p-3 border border-border rounded-lg bg-surface-input">
+            <Upload className="w-4 h-4 text-secondary flex-shrink-0" />
+            <span className="text-sm text-primary truncate flex-1">
               {file.name}
             </span>
-            <span className="text-xs text-gray-400 flex-shrink-0">
+            <span className="text-xs text-tertiary flex-shrink-0">
               {(file.size / 1024 / 1024).toFixed(1)} MB
             </span>
             <button
               type="button"
               onClick={clearFile}
               disabled={loading}
-              className="p-0.5 text-gray-400 hover:text-gray-600 transition-colors"
+              className="p-0.5 text-tertiary hover:text-secondary transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
         ) : (
           <label
-            className={`flex items-center justify-center gap-2 p-3 border border-dashed border-gray-300 rounded-md text-sm text-gray-500 hover:border-gray-400 hover:text-gray-600 transition-colors cursor-pointer ${
+            className={`flex items-center justify-center gap-2 p-3 border border-dashed border-border-input rounded-lg text-sm text-secondary hover:border-tertiary hover:text-primary hover:bg-surface-input transition-all cursor-pointer ${
               loading ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
@@ -360,11 +360,11 @@ export function NewPodcastForm() {
           </label>
         )}
 
-        {/* Generate button - always visible */}
+        {/* Generate button */}
         <button
           type="submit"
           disabled={loading || !hasInput}
-          className="w-full flex items-center justify-center gap-2 bg-gray-900 text-white rounded-md px-4 py-2.5 text-sm font-medium hover:bg-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+          className="w-full flex items-center justify-center gap-2 bg-accent text-white rounded-lg px-4 py-2.5 text-sm font-semibold hover:bg-accent-hover disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
         >
           Generate
         </button>
@@ -374,24 +374,24 @@ export function NewPodcastForm() {
 
       {/* In-progress card */}
       {loading && activeJob && currentStep && (
-        <div className="border border-gray-200 rounded-lg p-4 space-y-3">
+        <div className="border border-border rounded-xl p-4 space-y-3 bg-surface-card shadow-sm">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0 flex-1">
-              <h3 className="text-sm font-medium text-gray-900 truncate">
+              <h3 className="text-sm font-medium text-primary truncate">
                 {activeJob.title}
               </h3>
               <div className="flex items-center gap-3 mt-1.5">
                 {/* Status pill */}
-                <span className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium bg-blue-50 text-blue-700">
+                <span className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium bg-accent/10 text-accent">
                   <Loader2 className="w-3 h-3 animate-spin" />
                   {STEPS[currentStepIndex]?.statusLabel}
                 </span>
                 {activeJob.wordCount && (
-                  <span className="text-xs text-gray-500">
+                  <span className="text-xs text-secondary">
                     {activeJob.wordCount.toLocaleString()} words
                   </span>
                 )}
-                <span className="text-xs text-gray-400">
+                <span className="text-xs text-tertiary">
                   {formatTime(remainingSeconds)}
                 </span>
               </div>
@@ -399,7 +399,7 @@ export function NewPodcastForm() {
             {/* Stop button */}
             <button
               onClick={handleStop}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-md hover:bg-red-100 transition-colors flex-shrink-0"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium text-red-600 bg-red-50 rounded-lg hover:bg-red-100 transition-colors flex-shrink-0"
               title="Stop generation"
             >
               <Square className="w-3 h-3 fill-current" />
@@ -409,7 +409,7 @@ export function NewPodcastForm() {
 
           {/* Source */}
           {activeJob.sourceLabel && (
-            <div className="flex items-center gap-1 text-xs text-gray-400 truncate">
+            <div className="flex items-center gap-1 text-xs text-tertiary truncate">
               {activeJob.isFile ? (
                 <Upload className="w-3 h-3 flex-shrink-0" />
               ) : (
@@ -420,9 +420,9 @@ export function NewPodcastForm() {
           )}
 
           {/* Progress bar */}
-          <div className="w-full bg-gray-100 rounded-full h-1 overflow-hidden">
+          <div className="w-full bg-divider rounded-full h-1 overflow-hidden">
             <div
-              className="bg-blue-600 h-1 rounded-full transition-all duration-1000 ease-out"
+              className="bg-accent h-1 rounded-full transition-all duration-1000 ease-out"
               style={{ width: `${Math.max(overallProgress, 2)}%` }}
             />
           </div>

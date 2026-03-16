@@ -200,10 +200,10 @@ export function AudioPlayer({
           onChange={handleSeek}
           className="w-full h-1 cursor-pointer"
           style={{
-            background: `linear-gradient(to right, #111827 ${progress}%, #e5e7eb ${progress}%)`,
+            background: `linear-gradient(to right, #C4956A ${progress}%, #EAE5DD ${progress}%)`,
           }}
         />
-        <div className="flex justify-between text-xs text-gray-400 font-mono">
+        <div className="flex justify-between text-xs text-tertiary font-mono">
           <span>{formatTime(currentTime)}</span>
           <span>{formatTime(duration)}</span>
         </div>
@@ -213,7 +213,7 @@ export function AudioPlayer({
       <div className="flex items-center justify-center gap-6">
         <button
           onClick={() => skip(-15)}
-          className="p-2 text-gray-500 hover:text-gray-900 transition-colors"
+          className="p-2 text-secondary hover:text-primary transition-colors"
           aria-label="Skip back 15 seconds"
         >
           <SkipBack className="w-5 h-5" />
@@ -222,7 +222,7 @@ export function AudioPlayer({
         <button
           onClick={togglePlayPause}
           disabled={loading}
-          className="w-12 h-12 flex items-center justify-center bg-gray-900 text-white rounded-full hover:bg-gray-800 disabled:opacity-50 transition-colors"
+          className="w-12 h-12 flex items-center justify-center bg-accent text-white rounded-full hover:bg-accent-hover disabled:opacity-50 transition-colors"
           aria-label={isPlaying ? "Pause" : "Play"}
         >
           {loading ? (
@@ -236,7 +236,7 @@ export function AudioPlayer({
 
         <button
           onClick={() => skip(15)}
-          className="p-2 text-gray-500 hover:text-gray-900 transition-colors"
+          className="p-2 text-secondary hover:text-primary transition-colors"
           aria-label="Skip forward 15 seconds"
         >
           <SkipForward className="w-5 h-5" />
@@ -244,7 +244,7 @@ export function AudioPlayer({
 
         <button
           onClick={cyclePlaybackRate}
-          className="px-2 py-1 text-xs font-mono text-gray-500 hover:text-gray-900 border border-gray-200 rounded-md transition-colors"
+          className="px-2 py-1 text-xs font-mono text-secondary hover:text-primary border border-border rounded-lg transition-colors"
           aria-label="Change playback speed"
         >
           {playbackRate}x
