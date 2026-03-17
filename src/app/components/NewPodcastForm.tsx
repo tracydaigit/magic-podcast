@@ -138,11 +138,15 @@ export function NewPodcastForm() {
     let createdPodcastId: string | null = null;
 
     try {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+      // Try getUser first; if the token expired, refresh the session and retry
+      let { data: { user } } = await supabase.auth.getUser();
 
-      if (!user) throw new Error("Not authenticated");
+      if (!user) {
+        const { error: refreshError } = await supabase.auth.refreshSession();
+        if (refreshError) throw new Error("Not authenticated");
+        ({ data: { user } } = await supabase.auth.getUser());
+        if (!user) throw new Error("Not authenticated");
+      }
 
       const sourceUrl = file ? `file://${file.name}` : url.trim();
       const { data: podcast, error: insertError } = await supabase
